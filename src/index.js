@@ -29,14 +29,32 @@
 // リクエストをURLに送信
 // request.send();
 
-async function callApi() {
-    const url = "https://7778856-pytest-vscode.azurewebsites.net/api/hello/";
-    const params = {method : "POST", body : JSON.stringify({name : "Azure"})};
+// async function callApi() {
+//     const url = "https://7778856-pytest-vscode.azurewebsites.net/api/hello/";
+//     const params = {method : "POST", mode: 'no-cors', body : JSON.stringify({name : "Azure"})};
   
-    const response = await fetch(url, params);
-    const data = await response.json();
+//     const response = await fetch(url, params);
+//     const data = await response.json();
 
+//     console.log(data);
+// }
+
+// callApi();
+
+url = 'https://7778856-pytest-vscode.azurewebsites.net/api/hello/?name=Azure'
+
+fetch(url, {
+    method: 'POST'
+    // mode: 'no-cors',
+    // body: JSON.stringify({name : "Azure"})
+}).then((response) => {
+    if(!response.ok) {
+        console.log('error!');
+    } 
+    console.log('ok!');
+    return response.json();
+}).then((data)  => {
     console.log(data);
-}
-
-callApi();
+}).catch((error) => {
+    console.log(error);
+});
